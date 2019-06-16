@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork24_06_19"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="507.837" Width="323.198">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="203*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Left" Height="72" Margin="0,0,-0.2,0" Stroke="Black" VerticalAlignment="Top" Width="317" Fill="#FF000AD1"/>
+        <TextBlock HorizontalAlignment="Left" FontWeight="Bold" FontSize="40" Margin="10,10,-4.2,0" TextWrapping="Wrap" Text="Love Calculator" VerticalAlignment="Top" Height="44" Width="311" Foreground="#DDAB00FF"/>
+        <TextBox Name="maleNameTextBox" materialDesign:HintAssist.Hint="Male Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,25,9.8,328.4" FontSize="22" Grid.RowSpan="2"/>
+        <TextBox Name="femaleNameTextBox" materialDesign:HintAssist.Hint="Female Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,63,9.8,269.4" FontSize="22" Grid.Row="1"/>
+        <Button Name="pairAnalyzeButton" Click="PairAnalyzeButtonClick" Content="Analyze" HorizontalAlignment="Left" Margin="70,162.007,0,0" VerticalAlignment="Top" Width="157" Height="46" FontSize="24" Grid.Row="1"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="0,162.007,-0.2,0" VerticalAlignment="Top" Width="317" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,251,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Percent: " VerticalAlignment="Top" Height="44" Width="102" FontSize="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,300,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Comment: " VerticalAlignment="Top" Height="44" Width="120" FontSize="25"/>
+        <TextBlock Name="percentTextBlock" HorizontalAlignment="Left" Margin="112,251,-0.2,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="44" Width="205" FontSize="25"/>
+        <TextBlock Name="commentTextBlock" HorizontalAlignment="Left" Margin="10,328,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="68" Width="297" FontSize="18"/>
     </Grid>
 </Window>

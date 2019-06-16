@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HomeWork24_06_19
 {
@@ -23,6 +13,51 @@ namespace HomeWork24_06_19
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void PairAnalyzeButtonClick(object sender, RoutedEventArgs e)
+        {
+            Pair pair = new Pair();
+            string maleName = maleNameTextBox.Text.Trim();
+            string femaleName = femaleNameTextBox.Text.Trim();
+
+            Task.Run(() =>
+            {
+                string result;
+
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        client.Headers.Add("X-RapidAPI-Host", "love-calculator.p.rapidapi.com");
+                        client.Headers.Add("X-RapidAPI-Key", "e2ba7ffa30msh02aca4913ced372p15e70ajsn7a3200da9671");
+                        result = client.DownloadString($@"https://love-calculator.p.rapidapi.com/getPercentage?fname={maleName}&sname={femaleName}");
+                    }
+
+                    pair = JsonConvert.DeserializeObject<Pair>(result);
+                }
+                catch (WebException)
+                {
+                    try
+                    {
+                        using (var client = new WebClient())
+                        {
+                            client.Headers.Add("X-RapidAPI-Host", "love-calculator.p.rapidapi.com");
+                            client.Headers.Add("X-RapidAPI-Key", "e2ba7ffa30msh02aca4913ced372p15e70ajsn7a3200da9671");
+                            result = client.DownloadString($@"https://love-calculator.p.rapidapi.com/getPercentage?fname={maleName}&sname={femaleName}");
+                        }
+
+                        pair = JsonConvert.DeserializeObject<Pair>(result);
+                    }
+                    catch(WebException)
+                    {
+                        MessageBox.Show("This pair can't be analyzed");
+                    }
+                }
+            });
+
+            percentTextBlock.Text = pair.Percentage;
+            commentTextBlock.Text = pair.Comment;
         }
     }
 }
